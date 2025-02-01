@@ -12,7 +12,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  SortingFn,
 } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import {
@@ -23,8 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Input } from "@/components/ui/input"
-import { Problem } from "./Columns"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
