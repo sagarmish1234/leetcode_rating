@@ -2,6 +2,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { Checkbox } from "./ui/checkbox";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -23,11 +24,27 @@ export const columns: ColumnDef<Problem>[] = [
     header: "ID",
   },
   {
-    accessorKey: "Title",
+    accessorKey: 'Title',
+    cell: ({ row }) => {
+      return <div className="text-left"><strong>{row.original.Title}</strong></div>
+    },
     header: "Title",
   },
   {
-    accessorKey: "Rating",
+    accessorFn: row => Math.round(row.Rating),
     header: "Rating",
+  },
+  {
+    id: "select",
+    header: "Status",
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
   },
 ]
