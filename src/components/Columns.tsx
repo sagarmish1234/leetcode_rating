@@ -22,28 +22,37 @@ export const columns: ColumnDef<Problem>[] = [
   {
     accessorKey: "ID",
     header: "ID",
+    size: 50,
   },
   {
     accessorKey: 'Title',
     cell: ({ row }) => {
-      return <div className="text-left"><strong>{row.original.Title}</strong></div>
+      return <div className="text-left"><strong> <a href={`https://leetcode.com/problems/${row.original.TitleSlug}`}> {row.original.Title} </a></strong></div >
     },
+    size: 270,
     header: "Title",
   },
   {
-    accessorFn: row => Math.round(row.Rating),
+    cell: ({ row }) => {
+      return <div className="text-left"><strong>{Math.round(row.original.Rating)}</strong></div>
+    },
+    size: 50,
+
     header: "Rating",
   },
   {
     id: "select",
     header: "Status",
     cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
+      <div className="flex justify-start">
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      </div>
     ),
+    size: 50,
     enableSorting: false,
     enableHiding: false,
   },
