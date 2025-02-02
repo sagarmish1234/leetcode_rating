@@ -3,7 +3,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "./ui/checkbox";
-import { ArrowUpDown, Filter } from "lucide-react"
+import { ArrowUpDown } from "lucide-react"
 import { Button } from "./ui/button";
 
 import {
