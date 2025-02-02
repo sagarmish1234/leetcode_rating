@@ -12,7 +12,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  PaginationState,
 } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import {
@@ -63,9 +62,8 @@ export function DataTable<TData, TValue>({
 
 
   useEffect(() => {
-    if (pageIndex != "")
-      table.setPageIndex(parseInt(pageIndex) - 1)
-  }, [pageIndex])
+    setPagination((table.getState().pagination.pageIndex + 1).toString())
+  }, [table.getState().pagination.pageIndex])
 
   return (
     <div>
@@ -116,8 +114,8 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center justify-between space-x-2 py-4 ">
         <Input onChange={e => {
           setPagination(e.target.value)
-
-          // table.setPageIndex(parseInt(e.target.value))
+          if (e.currentTarget.value != "")
+            table.setPageIndex(parseInt(e.currentTarget.value) - 1)
         }} type="text" className="w-min" value={pageIndex} />
         <div>
           <Button
