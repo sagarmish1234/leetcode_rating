@@ -6,8 +6,6 @@ import { Checkbox } from "./ui/checkbox";
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "./ui/button";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export type Problem = {
   Rating: number;
   ID: number;
@@ -19,11 +17,6 @@ export type Problem = {
   ContestID_en: string;
   ContestID_zh: string;
 }
-// const sortStatusFn: SortingFn<Problem> = (rowA, rowB, _columnId) => {
-//   const statusA = rowA.original.Rating
-//   const statusB = rowB.original.Rating
-//   return statusA - statusB
-// }
 export const columns: ColumnDef<Problem>[] = [
   {
     accessorKey: "ID",
@@ -39,7 +32,6 @@ export const columns: ColumnDef<Problem>[] = [
     header: "Title",
   },
   {
-    // id: "Rating",
     cell: ({ row }) => {
       return <div className="text-center">{Math.round(row.original.Rating).toString()}</div>
     },
@@ -51,7 +43,6 @@ export const columns: ColumnDef<Problem>[] = [
           <Button
             variant="ghost"
             onClick={() => {
-              // console.log(column.getIsSorted())
               column.toggleSorting(column.getIsSorted() === "asc")
             }}
           >
@@ -62,7 +53,6 @@ export const columns: ColumnDef<Problem>[] = [
       )
     },
 
-    // sortingFn: sortStatusFn
   },
   {
     id: "select",
