@@ -111,7 +111,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-between space-x-2 py-4 ">
+      <div className="flex items-center justify-start space-x-2 py-4 ">
         <div className="flex gap-3 items-center">
 
           <Input onChange={e => {
@@ -123,7 +123,7 @@ export function DataTable<TData, TValue>({
           <Input type="text" className="w-20" value={table.getPageCount()} disabled={true} />
 
         </div>
-        <div>
+        <div className="flex gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -140,6 +140,26 @@ export function DataTable<TData, TValue>({
           >
             Next
           </Button>
+        </div>
+        <div className="flex items-center py-4">
+          <Input
+            placeholder="Start rating"
+            value={(table.getColumn("Rating")?.getFilterValue() as [string, string])?.[0] ?? ''}
+            onChange={(event) =>
+              table.getColumn("Rating")?.setFilterValue((old: [string, string]) => [event.target.value, old?.[1]])
+            }
+            className="max-w-sm"
+          />
+          -
+          <Input
+            placeholder="End rating"
+            value={(table.getColumn("Rating")?.getFilterValue() as [string, string])?.[1] ?? ''}
+            onChange={(event) =>
+              table.getColumn("Rating")?.setFilterValue((old: [string, string]) => [old?.[0], event.target.value])
+            }
+            className="max-w-sm"
+          />
+
         </div>
       </div>
     </div>

@@ -32,6 +32,7 @@ export const columns: ColumnDef<Problem>[] = [
     header: "Title",
   },
   {
+    id: "Rating",
     cell: ({ row }) => {
       return <div className="text-center">{Math.round(row.original.Rating).toString()}</div>
     },
@@ -51,6 +52,15 @@ export const columns: ColumnDef<Problem>[] = [
           </Button>
         </div>
       )
+    },
+    filterFn: (row, id, value: [string, string]) => {
+      const rating = `${Math.round(row.original.Rating)}`;
+      const [start, end] = value;
+      if (start != '' && rating < parseInt(start))
+        return false;
+      if (end != '' && rating > parseInt(end))
+        return false;
+      return true;
     },
 
   },
