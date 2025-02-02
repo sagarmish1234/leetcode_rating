@@ -111,55 +111,59 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-start space-x-2 py-4 ">
-        <div className="flex gap-3 items-center">
+      <div className="flex items-center justify-between space-x-2 py-4 ">
+        <div className="flex items-center gap-2">
+          <div className="flex gap-3 items-center">
 
-          <Input onChange={e => {
-            setPagination(e.target.value)
-            if (e.currentTarget.value != "")
-              table.setPageIndex(parseInt(e.currentTarget.value) - 1)
-          }} type="text" className="w-20" value={pageIndex} />
-          /
-          <Input type="text" className="w-20" value={table.getPageCount()} disabled={true} />
+            <Input onChange={e => {
+              setPagination(e.target.value)
+              if (e.currentTarget.value != "")
+                table.setPageIndex(parseInt(e.currentTarget.value) - 1)
+            }} type="text" className="w-20" value={pageIndex} />
+            page of
+            <Input type="text" className="w-20" value={table.getPageCount()} disabled={true} />
 
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              Next
+            </Button>
+          </div>
         </div>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
-        <div className="flex items-center py-4">
-          <Input
-            placeholder="Start rating"
-            value={(table.getColumn("Rating")?.getFilterValue() as [string, string])?.[0] ?? ''}
-            onChange={(event) =>
-              table.getColumn("Rating")?.setFilterValue((old: [string, string]) => [event.target.value, old?.[1]])
-            }
-            className="max-w-sm"
-          />
-          -
-          <Input
-            placeholder="End rating"
-            value={(table.getColumn("Rating")?.getFilterValue() as [string, string])?.[1] ?? ''}
-            onChange={(event) =>
-              table.getColumn("Rating")?.setFilterValue((old: [string, string]) => [old?.[0], event.target.value])
-            }
-            className="max-w-sm"
-          />
+        <div>
+          <div className="flex items-center py-4 gap-2">
+            <Input
+              placeholder="start"
+              value={(table.getColumn("Rating")?.getFilterValue() as [string, string])?.[0] ?? ''}
+              onChange={(event) =>
+                table.getColumn("Rating")?.setFilterValue((old: [string, string]) => [event.target.value, old?.[1]])
+              }
+              className="max-w-20"
+            />
+            -
+            <Input
+              placeholder="end"
+              value={(table.getColumn("Rating")?.getFilterValue() as [string, string])?.[1] ?? ''}
+              onChange={(event) =>
+                table.getColumn("Rating")?.setFilterValue((old: [string, string]) => [old?.[0], event.target.value])
+              }
+              className="max-w-20"
+            />
 
+          </div>
         </div>
       </div>
     </div>
