@@ -112,11 +112,17 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-between space-x-2 py-4 ">
-        <Input onChange={e => {
-          setPagination(e.target.value)
-          if (e.currentTarget.value != "")
-            table.setPageIndex(parseInt(e.currentTarget.value) - 1)
-        }} type="text" className="w-min" value={pageIndex} />
+        <div className="flex gap-3 items-center">
+
+          <Input onChange={e => {
+            setPagination(e.target.value)
+            if (e.currentTarget.value != "")
+              table.setPageIndex(parseInt(e.currentTarget.value) - 1)
+          }} type="text" className="w-20" value={pageIndex} />
+          /
+          <Input type="text" className="w-20" value={table.getPageCount()} disabled={true} />
+
+        </div>
         <div>
           <Button
             variant="outline"
